@@ -1,0 +1,20 @@
+
+cache:
+- name: redis_default
+  type: redis
+  host: localhost
+  port: 6379
+  database_number: 0
+  credentials:
+#    password: "mudar123!@#"
+
+http:
+  header_cache:
+    - name: default
+      values: ["Authorization"]
+  routes:
+  - regex: "^/partners/.*$"
+    method: ["GET"]
+    header_cache: "default"
+    cache_key: "redis_default"
+    millis_ttl: 60000
